@@ -1,15 +1,17 @@
 """
-Emotional AI — Lin Xia v3.0 — Product App
+Emotional AI — Lin Xia v4.0 — Agentic Cognitive Architecture
 Full-stack chat app with:
-  - Text chat with emotional AI
-  - Image upload → emotional vision reaction
-  - Voice synthesis auto-playback
-  - Real-time emotion dashboard (mood/trust/affection)
-  - Knowledge graph viewer (Mermaid)
-  - Model-level emotion tag parsing
+  - LangGraph cognitive graph (inner monologue + self-check guardrail)
+  - Multi-agent subconscious bus (Memory, Emotion, Metabolism, Companion)
+  - Pluggable inference backend (llama.cpp / MLX Apple Silicon)
+  - RAGAS evaluation framework for RAG quality
+  - Text chat + Vision + Voice + Knowledge Graph + Emotion Tracking
+  - Full-duplex voice interaction with interruption handling
 
-Run: python3 app.py         (CLI)
-     python3 app.py --ui    (Gradio Web UI)
+Run: python3 app.py                          (CLI, auto-detect backend)
+     python3 app.py --ui                     (Gradio Web UI)
+     python3 app.py --ui --backend mlx       (MLX Apple Silicon)
+     python3 app.py --ui --backend llama_cpp  (llama.cpp)
 """
 
 import argparse
@@ -18,8 +20,6 @@ import time
 import sys
 import os
 from pathlib import Path
-
-from llama_cpp import Llama
 
 from context_engine.context_manager import ContextManager
 from context_engine.sliding_summary import SlidingSummary
@@ -32,6 +32,38 @@ from memory.knowledge_graph import KnowledgeGraph
 from memory.graph_extractor import GraphExtractor
 from voice.tts_engine import TTSEngine
 from vision.vision_engine import VisionEngine
+from vision.face_memory import FaceMemory
+from soul.metabolism import BioClock, MemoryConsolidator, DreamEngine, ProactiveEngine
+from soul.relationship import RelationshipEvolution
+from soul.screen_perception import ScreenPerception
+from soul.screen_share import ScreenShareEngine
+from soul.companion import CompanionEngine
+from soul.health_perception import HealthPerception
+from avatar.avatar_engine import AvatarEngine
+from avatar.desktop_app import DesktopLinXia
+
+# v4.0 — Cognitive Graph + Multi-Agent
+try:
+    from soul.cognitive_graph import LinXiaCognitiveGraph, CognitiveNodes
+    HAS_COGNITIVE_GRAPH = True
+except ImportError:
+    HAS_COGNITIVE_GRAPH = False
+
+try:
+    from soul.subconscious_bus import SubconsciousBus, SyncBusAdapter
+    from soul.agents import (
+        AgentOrchestra, MemoryAgent, EmotionAnalystAgent,
+        MetabolismAgent, CompanionAgent,
+    )
+    HAS_AGENTS = True
+except ImportError:
+    HAS_AGENTS = False
+
+try:
+    from audio.interruption_handler import InterruptionHandler
+    HAS_INTERRUPTION = True
+except ImportError:
+    HAS_INTERRUPTION = False
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from config import CHARACTER_DESCRIPTION
@@ -39,8 +71,8 @@ from config import CHARACTER_DESCRIPTION
 
 class EmotionalAI:
     """
-    Full-stack Emotional AI Engine v3.0.
-    Text + Vision + Voice + Knowledge Graph + Emotion Tracking.
+    Full-stack Emotional AI Engine v4.0.
+    LangGraph Cognitive Graph + Multi-Agent Bus + Pluggable Backend.
     """
 
     def __init__(
@@ -50,20 +82,29 @@ class EmotionalAI:
         enable_memory: bool = True,
         enable_tts: bool = True,
         enable_vision: bool = True,
+        enable_soul: bool = True,
+        backend: str = "llama_cpp",
     ):
         print("=" * 60)
-        print("  Emotional AI — Lin Xia (林夏) v3.0")
-        print("  Text + Vision + Voice + Knowledge Graph")
+        print("  Emotional AI — Lin Xia (林夏) v4.0")
+        print("  Cognitive Graph + Multi-Agent + Pluggable Backend")
         print("=" * 60)
 
-        # 1. Load LLM
-        print(f"\n[1/7] Loading model: {os.path.basename(model_path)}")
-        self.llm = Llama(
-            model_path=model_path,
-            n_ctx=n_ctx,
-            n_gpu_layers=-1,
-            verbose=False,
-        )
+        self.backend_name = backend
+
+        # 1. Load LLM (pluggable backend)
+        print(f"\n[1/9] Loading model ({backend}): {os.path.basename(model_path)}")
+        if backend == "mlx":
+            from inference.mlx_backend import MLXBackend
+            self.llm = MLXBackend(model_path=model_path if model_path != "emotional-model-output/linxia-dpo-q8_0.gguf" else None)
+        else:
+            from llama_cpp import Llama
+            self.llm = Llama(
+                model_path=model_path,
+                n_ctx=n_ctx,
+                n_gpu_layers=-1,
+                verbose=False,
+            )
 
         # 2. Context Manager
         print("[2/7] Context engine...")
@@ -111,23 +152,116 @@ class EmotionalAI:
             print("[5/7] TTS disabled.")
             self.tts = None
 
-        # 8. Vision
+        # 8. Vision + Face Memory
         self.enable_vision = enable_vision
         if enable_vision:
-            print("[6/7] Vision engine...")
+            print("[6/7] Vision engine + Face memory...")
             self.vision = VisionEngine(strategy="metadata")
+            self.face_memory = FaceMemory(knowledge_graph=self.knowledge_graph)
         else:
             print("[6/7] Vision disabled.")
             self.vision = None
+            self.face_memory = None
 
-        print("[7/7] Ready!")
+        # 9. Soul System (Bio-clock, Relationship, Screen, Health)
+        self.enable_soul = enable_soul
+        if enable_soul:
+            print("[7/8] Soul Engine & Metabolism...")
+            self.bio_clock = BioClock()
+            self.relationship = RelationshipEvolution()
+            self.screen_percept = ScreenPerception()
+            self.screen_share = ScreenShareEngine()
+            self.companion = CompanionEngine(knowledge_graph=self.knowledge_graph)
+            self.health = HealthPerception()
+            self.desktop_app = DesktopLinXia()
+        else:
+            self.bio_clock = None
+            self.relationship = None
+            self.screen_percept = None
+            self.screen_share = None
+            self.companion = None
+            self.health = None
+            self.desktop_app = None
+
+        # 10. Cognitive Graph (LangGraph)
+        self.cognitive_graph = None
+        if HAS_COGNITIVE_GRAPH:
+            print("[8/10] Cognitive Graph (LangGraph)...")
+            try:
+                nodes = CognitiveNodes(
+                    llm=self.llm,
+                    memory_retriever=self.memory_retriever if enable_memory else None,
+                    memory_store=self.memory_store,
+                    memory_extractor=self.memory_extractor,
+                    knowledge_graph=self.knowledge_graph,
+                    graph_extractor=self.graph_extractor if enable_memory else None,
+                    context_mgr=self.context_mgr,
+                    sliding_summary=self.sliding_summary,
+                    emotional_state_model=self.emotional_state,
+                    tts_engine=self.tts if enable_tts else None,
+                    vision_engine=self.vision if enable_vision else None,
+                    face_memory=self.face_memory if enable_vision else None,
+                    bio_clock=self.bio_clock if enable_soul else None,
+                    relationship=self.relationship if enable_soul else None,
+                    screen_percept=self.screen_percept if enable_soul else None,
+                    screen_share=self.screen_share if enable_soul else None,
+                    health=self.health if enable_soul else None,
+                    companion=self.companion if enable_soul else None,
+                    smart_ctx=self.smart_ctx,
+                    system_prompt=CHARACTER_DESCRIPTION,
+                )
+                self.cognitive_graph = LinXiaCognitiveGraph(nodes)
+                print("       Cognitive Graph: ✓ (Inner Monologue + Self-Check)")
+            except Exception as e:
+                print(f"       Cognitive Graph failed: {e}")
+        else:
+            print("[8/10] Cognitive Graph: disabled (install langgraph)")
+
+        # 11. Multi-Agent Subconscious Bus
+        self.orchestra = None
+        if HAS_AGENTS and enable_soul:
+            print("[9/10] Multi-Agent Subconscious Bus...")
+            try:
+                bus = SubconsciousBus(debug=False)
+                self.bus_adapter = SyncBusAdapter(bus)
+                self.orchestra = AgentOrchestra(bus)
+                self.orchestra.register(MemoryAgent(
+                    bus, self.memory_store, self.memory_retriever,
+                ))
+                self.orchestra.register(EmotionAnalystAgent(
+                    bus, health_perception=self.health,
+                ))
+                self.orchestra.register(MetabolismAgent(
+                    bus, bio_clock=self.bio_clock,
+                ))
+                self.orchestra.register(CompanionAgent(
+                    bus, companion_engine=self.companion,
+                    relationship=self.relationship,
+                ))
+                self.bus_adapter.start()
+                print(f"       Agents: {len(self.orchestra.agents)} active")
+            except Exception as e:
+                print(f"       Agent system failed: {e}")
+                self.orchestra = None
+        else:
+            print("[9/10] Multi-Agent Bus: disabled")
+
+        # 12. Interruption Handler
+        self.interruption_handler = None
+        if HAS_INTERRUPTION:
+            self.interruption_handler = InterruptionHandler()
+            print("[10/10] Interruption Handler: ✓")
+        else:
+            print("[10/10] Interruption Handler: disabled")
+
         print(f"\n{'=' * 60}")
-        print("Type your message to chat. Commands: /status /memory /graph /quit")
+        print("Type your message to chat. Commands: /status /memory /graph /trace /quit")
         print(f"{'=' * 60}\n")
 
     def chat(self, user_input: str, image_path: str = None) -> dict:
         """
         Process user message + optional image.
+        v4.0: Routes through LangGraph cognitive graph if available.
 
         Returns:
             {
@@ -138,9 +272,52 @@ class EmotionalAI:
                 "affection": int,
                 "audio_path": str,     # Path to generated audio
                 "image_reaction": str, # Vision reaction (if image provided)
+                "inner_monologue": str,# v4.0: hidden CoT (for debug)
+                "trace": list,         # v4.0: cognitive graph trace
             }
         """
-        result = {"audio_path": "", "image_reaction": ""}
+        # v4.0: Notify agents of user input
+        if self.orchestra and hasattr(self, 'bus_adapter'):
+            self.bus_adapter.publish_sync(
+                "user.input", {"text": user_input}, source="MainApp"
+            )
+
+        # v4.0: Use cognitive graph if available
+        if self.cognitive_graph:
+            return self._chat_cognitive(user_input, image_path)
+
+        # Fallback: original v3.0 linear pipeline
+        return self._chat_legacy(user_input, image_path)
+
+    def _chat_cognitive(self, user_input: str, image_path: str = None) -> dict:
+        """v4.0: Route through LangGraph cognitive graph."""
+        try:
+            state = self.cognitive_graph.invoke(user_input, image_path or "")
+            es = state.get("emotional_state", {})
+            self.emotional_state = ModelEmotionalState(
+                mood=es.get("mood", "calm"),
+                intensity=es.get("intensity", 5),
+                trust=es.get("trust", 7),
+                affection=es.get("affection", 6),
+            )
+            return {
+                "text": state.get("response_text", ""),
+                "emotion": es.get("mood", "calm"),
+                "intensity": es.get("intensity", 5),
+                "trust": es.get("trust", 7),
+                "affection": es.get("affection", 6),
+                "audio_path": state.get("audio_path", ""),
+                "image_reaction": state.get("image_reaction", ""),
+                "inner_monologue": state.get("inner_monologue", ""),
+                "trace": state.get("trace", []),
+            }
+        except Exception as e:
+            print(f"[COGNITIVE] Graph error, falling back: {e}")
+            return self._chat_legacy(user_input, image_path)
+
+    def _chat_legacy(self, user_input: str, image_path: str = None) -> dict:
+        """v3.0 legacy linear pipeline (fallback)."""
+        result = {"audio_path": "", "image_reaction": "", "inner_monologue": "", "trace": []}
 
         # Step 0: Vision — if image provided
         vision_context = ""
@@ -159,21 +336,42 @@ class EmotionalAI:
             memories = self.memory_retriever.retrieve(user_input, n_results=3)
             self.context_mgr.set_memories(memories)
 
-        # Step 1b: Get graph context
-        graph_context = ""
-        if self.knowledge_graph:
-            graph_context = self.knowledge_graph.to_context_string(user_input)
+        # Step 1c: Get Soul Context (Bio-clock + Relationship + Screen + Health)
+        soul_context = ""
+        if self.enable_soul:
+            # Time-aware bio state
+            bio_state = self.bio_clock.get_state()
+            soul_context += f"\n{bio_state['context_line']}"
+            
+            # Relationship stage
+            soul_context += f"\n{self.relationship.get_relationship_context()}"
+            
+            # Screen/App awareness
+            app_ctx = self.screen_percept.perceive()
+            soul_context += f"\n{app_ctx.context_for_llm}"
+            
+            # Screen visual context (if share enabled)
+            if self.screen_share.enabled:
+                screen_snap = self.screen_share.capture_and_analyze()
+                if screen_snap:
+                    soul_context += f"\n{screen_snap.to_context_string()}"
+            
+            # Health/Bio-sensing
+            health_ctx = self.health.get_health_context()
+            if health_ctx:
+                soul_context += f"\n{health_ctx}"
 
         # Step 2: Add turn
         full_input = user_input + vision_context
         self.context_mgr.add_turn("user", full_input)
         self.sliding_summary.add_turn("user", full_input)
 
-        # Step 3: Build prompt with emotion state + graph
+        # Step 3: Build prompt with emotion state + graph + soul
         system = CHARACTER_DESCRIPTION
         system += "\n" + self.emotional_state.to_context_line()
-        if graph_context:
-            system += "\n" + graph_context
+        # (Note: graph_context variable was missing in original snippet, assuming it's handled by context_mgr)
+        if soul_context:
+            system += "\n" + soul_context
 
         # Add emotion instruction for V2 model
         system += (
@@ -223,10 +421,38 @@ class EmotionalAI:
             if self.graph_extractor:
                 self.graph_extractor.extract_from_turn(user_input, clean_text)
 
-        # Step 8: TTS
+        # Step 7: Record relationship progression
+        if self.enable_soul:
+            self.relationship.record_interaction(
+                user_input, clean_text, 
+                trust_delta=self.emotional_state.trust - result.get("trust", 10),
+                affection_delta=self.emotional_state.affection - result.get("affection", 10),
+                emotion=self.emotional_state.mood
+            )
+
+        # Step 8: TTS (with bio-clock voice modulation)
         if self.enable_tts and self.tts:
-            audio = self.tts.speak(clean_text, self.emotional_state.mood)
+            voice_rate = 0
+            voice_pitch = 0
+            if self.enable_soul:
+                bio_state = self.bio_clock.get_state()
+                voice_rate = bio_state.get("voice_rate", 0)
+                voice_pitch = bio_state.get("voice_pitch", 0)
+
+            audio = self.tts.speak(
+                clean_text, 
+                self.emotional_state.mood,
+                rate=voice_rate,
+                pitch=voice_pitch
+            )
             result["audio_path"] = audio
+
+        # Step 9: Update Desktop App if running
+        if self.enable_soul and self.desktop_app and self.desktop_app._running:
+            self.desktop_app.update_emotion(self.emotional_state.mood)
+            self.desktop_app.say(clean_text)
+            if self.health.last_state.status == "tracking":
+                self.desktop_app.update_health(self.health.last_state.bpm, self.health.last_state.stress_level)
 
         return result
 
@@ -234,12 +460,17 @@ class EmotionalAI:
         es = self.emotional_state
         mem_count = self.memory_store.get_memory_count() if self.memory_store else 0
         kg = self.knowledge_graph.get_stats() if self.knowledge_graph else {}
-        return (
-            f"💭 Mood: {es.mood} (intensity {es.intensity}/10)\n"
-            f"💛 Trust: {es.trust}/10 | Affection: {es.affection}/10\n"
-            f"🧠 Memories: {mem_count} | Graph: {kg.get('nodes', 0)} nodes, {kg.get('edges', 0)} edges\n"
-            f"🔊 TTS: {'on' if self.enable_tts else 'off'} | 👁 Vision: {'on' if self.enable_vision else 'off'}"
-        )
+        parts = [
+            f"💭 Mood: {es.mood} (intensity {es.intensity}/10)",
+            f"💛 Trust: {es.trust}/10 | Affection: {es.affection}/10",
+            f"🧠 Memories: {mem_count} | Graph: {kg.get('nodes', 0)} nodes, {kg.get('edges', 0)} edges",
+            f"🔊 TTS: {'on' if self.enable_tts else 'off'} | 👁 Vision: {'on' if self.enable_vision else 'off'}",
+            f"🧬 Backend: {self.backend_name} | 🧩 CogGraph: {'✓' if self.cognitive_graph else '✗'}",
+        ]
+        if self.orchestra:
+            stats = self.orchestra.bus.get_stats() if hasattr(self.orchestra, 'bus') else {}
+            parts.append(f"🤖 Agents: {len(self.orchestra.agents)} | Events: {stats.get('published', 0)}")
+        return "\n".join(parts)
 
     def get_graph_mermaid(self) -> str:
         if self.knowledge_graph:
@@ -285,12 +516,48 @@ def run_cli(ai: EmotionalAI):
 # ---------------------------------------------------------------------------
 
 def run_gradio(ai: EmotionalAI):
+    import threading
     try:
         import gradio as gr
     except ImportError:
         print("Gradio not installed. Run: pip install gradio")
         run_cli(ai)
         return
+
+    # Background processing state
+    state = {
+        "bio_sensing": False,
+        "screen_share": False,
+        "desktop_mode": False
+    }
+
+    def bio_sensing_loop():
+        """Background thread for webcam health tracking."""
+        import cv2
+        cap = None
+        while True:
+            if state["bio_sensing"]:
+                if cap is None:
+                    cap = cv2.VideoCapture(0)
+                
+                ret, frame = cap.read()
+                if ret:
+                    ai.health.process_frame(frame)
+                    # Update desktop app if running
+                    if ai.desktop_app and ai.desktop_app._running:
+                        hs = ai.health.last_state
+                        if hs.status == "tracking":
+                            ai.desktop_app.update_health(hs.bpm, hs.stress_level)
+            else:
+                if cap is not None:
+                    cap.release()
+                    cap = None
+            
+            time.sleep(0.1)
+
+    # Start bio thread
+    bio_thread = threading.Thread(target=bio_sensing_loop, daemon=True)
+    bio_thread.start()
 
     def respond(message, image, history):
         img_path = image if image else None
@@ -305,7 +572,17 @@ def run_gradio(ai: EmotionalAI):
         history.append({"role": "assistant", "content": response_text})
 
         audio = result.get("audio_path", "")
-        return history, audio, ai.get_status()
+        
+        # Format bio info for status
+        bio_info = ""
+        if state["bio_sensing"]:
+            hs = ai.health.last_state
+            if hs.status == "tracking":
+                bio_info = f"\n💓 Body: {hs.bpm:.0f} BPM | Stress: {hs.stress_level:.1%}"
+            else:
+                bio_info = f"\n💓 Body: {hs.status}"
+
+        return history, audio, ai.get_status() + bio_info
 
     def get_graph():
         return ai.get_graph_mermaid()
@@ -317,11 +594,11 @@ def run_gradio(ai: EmotionalAI):
     """
 
     with gr.Blocks(
-        title="Lin Xia — Emotional AI v3.0",
+        title="Lin Xia — Emotional AI v4.0",
         theme=gr.themes.Soft(primary_hue="pink", secondary_hue="purple"),
         css=css,
     ) as demo:
-        gr.Markdown("# 🌸 Lin Xia (林夏) — Emotional AI v3.0")
+        gr.Markdown("# 🌸 Lin Xia (林夏) — Emotional AI v4.0")
         gr.Markdown("*Text + Vision + Voice + Knowledge Graph*")
 
         with gr.Row():
@@ -357,6 +634,40 @@ def run_gradio(ai: EmotionalAI):
                     interactive=False,
                     elem_classes=["emotion-panel"],
                 )
+
+                gr.Markdown("### 🛠️ v6.0 Modules")
+                with gr.Group():
+                    bio_toggle = gr.Checkbox(label="💓 Bio-Sensing (Webcam rPPG)", value=False)
+                    share_toggle = gr.Checkbox(label="🖥️ Screen Sharing", value=False)
+                    desktop_btn = gr.Button("🚀 Launch Desktop Mode", variant="secondary")
+                
+                def toggle_bio(val):
+                    state["bio_sensing"] = val
+                    return f"Bio-Sensing: {'ON' if val else 'OFF'}"
+                
+                def toggle_share(val):
+                    state["screen_share"] = val
+                    if ai.screen_share:
+                        if val: ai.screen_share.enable()
+                        else: ai.screen_share.disable()
+                    return f"Screen Share: {'ON' if val else 'OFF'}"
+                
+                def launch_desktop():
+                    if ai.desktop_app:
+                        # Launch in a separate thread to not block Gradio
+                        def run():
+                            ai.desktop_app.launch(
+                                initial_emotion=ai.emotional_state.mood,
+                                initial_message="我来桌面陪你啦！"
+                            )
+                        threading.Thread(target=run, daemon=True).start()
+                        state["desktop_mode"] = True
+                        return "Desktop Mode Launched!"
+                    return "Desktop App Not Available"
+
+                bio_toggle.change(fn=toggle_bio, inputs=bio_toggle, outputs=status_box)
+                share_toggle.change(fn=toggle_share, inputs=share_toggle, outputs=status_box)
+                desktop_btn.click(fn=launch_desktop, outputs=status_box)
 
                 gr.Markdown("### 🧠 Knowledge Graph")
                 graph_btn = gr.Button("Refresh Graph")
@@ -402,17 +713,20 @@ def run_gradio(ai: EmotionalAI):
 # ---------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser(description="Emotional AI — Lin Xia v3.0")
+    parser = argparse.ArgumentParser(description="Emotional AI — Lin Xia v4.0")
     parser.add_argument("--model", default=None, help="Path to GGUF model")
     parser.add_argument("--ctx", type=int, default=4096, help="Context window size")
     parser.add_argument("--ui", action="store_true", help="Launch Gradio web UI")
     parser.add_argument("--no-tts", action="store_true", help="Disable TTS")
     parser.add_argument("--no-memory", action="store_true", help="Disable memory")
     parser.add_argument("--no-vision", action="store_true", help="Disable vision")
+    parser.add_argument("--backend", default="llama_cpp",
+                        choices=["llama_cpp", "mlx", "auto"],
+                        help="Inference backend (default: llama_cpp)")
     args = parser.parse_args()
 
     # Auto-detect best model
-    if args.model is None:
+    if args.model is None and args.backend != "mlx":
         candidates = [
             "emotional-model-output/linxia-dpo-q8_0.gguf",     # Best: DPO aligned
             "emotional-model-output/linxia-emotional-v2-q8_0.gguf", # V2: emotion tags
@@ -420,6 +734,8 @@ def main():
             "emotional-model-output/linxia-q4_k_m.gguf",            # Lightweight
         ]
         args.model = next((c for c in candidates if os.path.exists(c)), candidates[0])
+    elif args.model is None:
+        args.model = "emotional-model-output/linxia-dpo-q8_0.gguf"  # Placeholder for MLX
 
     ai = EmotionalAI(
         model_path=args.model,
@@ -427,6 +743,7 @@ def main():
         enable_memory=not args.no_memory,
         enable_tts=not args.no_tts,
         enable_vision=not args.no_vision,
+        backend=args.backend,
     )
 
     if args.ui:

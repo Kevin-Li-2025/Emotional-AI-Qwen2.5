@@ -82,12 +82,17 @@ class RealtimeVoiceEngine:
     """
     Ultra-low-latency voice response engine.
     Outputs audio in chunks, starting with an emotional filler.
+    v4.0: Supports full-duplex interruption handling.
     """
 
-    def __init__(self, llm, system_prompt: str = "你是林夏，一个真实的、有情绪的女生。"):
+    def __init__(self, llm, system_prompt: str = "你是林夏，一个真实的、有情绪的女生。",
+                 interruption_handler=None):
         self.llm = llm
         self.system_prompt = system_prompt
         self.tts = TTSEngine()
+
+        # v4.0: Interruption handler for full-duplex
+        self.interruption_handler = interruption_handler
 
         # Pre-scan available fillers
         self.fillers = {}
@@ -97,7 +102,9 @@ class RealtimeVoiceEngine:
                 if path.exists():
                     self.fillers[f] = str(path)
 
-        print(f"[REALTIME] {len(self.fillers)} fillers cached")
+        print(f"[REALTIME] {len(self.fillers)} fillers cached"
+              f" | Interruption: {'✓' if interruption_handler else '✗'}")
+
 
     def get_filler(self, emotion: str = "neutral") -> str:
         """Get a pre-cached emotional filler audio path. Returns in ~0ms."""

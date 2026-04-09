@@ -27,3 +27,12 @@ gradio
 requests
 numpy
 pandas
+
+# v4.0 — Evaluation
+ragas
+
+# v4.0 — Agentic Architecture
+langgraph
+
+# v4.0 — Apple Silicon Inference (optional)
+# mlx-lm  # Uncomment on Apple Silicon Macs
