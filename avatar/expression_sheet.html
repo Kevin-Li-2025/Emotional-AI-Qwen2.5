@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Lin Xia Expressions</title>
+<style>
+body { background: #1a1a2e; color: #eee; font-family: 'Segoe UI', sans-serif;
+       display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 30px; }
+.card { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 15px;
+        backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+h1 { width: 100%; text-align: center; font-size: 24px; }
+</style></head><body>
+<h1>🌸 Lin Xia — Expression Sheet</h1>
+<div class="card">
+<div id="linxia-avatar" style="display:flex;justify-content:center;align-items:center;">
+<style>
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(0deg); }
+  }
+  @keyframes sway-sad {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(3px) rotate(-2deg); }
+  }
+  @keyframes shy-sway {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(3deg); }
+  }
+  @keyframes sparkle-anim {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  @keyframes speaking-anim {
+    0%, 100% { ry: 3; }
+    25% { ry: 10; }
+    50% { ry: 5; }
+    75% { ry: 12; }
+  }
+  @keyframes tear-fall {
+    0% { opacity: 0.6; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  #linxia-head {
+    animation: float 4s ease-in-out infinite;
+    transform-origin: center 250px;
+  }
+  .eye-group { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+  .sparkle { animation: sparkle-anim 1.5s ease-in-out infinite; }
+  .speaking { animation: speaking-anim 0.3s ease-in-out infinite; }
+  .tear { animation: tear-fall 2s ease-in infinite; }
+  .tear-delay { animation-delay: 0.8s; }
+</style>
+<svg width="200" height="250" viewBox="0 0 300 350">
+  <defs>
+    <radialGradient id="skinGrad" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#FFF0E0"/>
+      <stop offset="100%" stop-color="#FFE4C4"/>
+    </radialGradient>
+    <radialGradient id="hairShine" cx="40%" cy="30%">
+      <stop offset="0%" stop-color="#4A3020"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </radialGradient>
+  </defs>
+
+  <g id="linxia-head">
+    <!-- Hair back -->
+    <ellipse cx="150" cy="175" rx="85" ry="100" fill="url(#hairShine)"/>
+    <!-- Hair strands back -->
+    <path d="M75,200 Q65,260 80,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+    <path d="M225,200 Q235,260 220,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+
+    <!-- Neck -->
+    <rect x="135" y="265" width="30" height="30" rx="5" fill="#FFE4C4"/>
+
+    <!-- Face -->
+    <ellipse cx="150" cy="200" rx="68" ry="78" fill="url(#skinGrad)"/>
+
+    <!-- Blush -->
+    <ellipse cx="110" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.0)" opacity="0.0"/>
+    <ellipse cx="190" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.0)" opacity="0.0"/>
+
+    <!-- Eyes -->
+    <g class="eye-group">
+      
+            <ellipse cx="125" cy="190" rx="12.0" ry="14.0" fill="white"/>
+            <circle cx="125" cy="190" r="7.0" fill="#4A2818"/>
+            <circle cx="125" cy="190" r="3.5" fill="#1A0A05"/>
+        
+      
+            <ellipse cx="175" cy="190" rx="12.0" ry="14.0" fill="white"/>
+            <circle cx="175" cy="190" r="7.0" fill="#4A2818"/>
+            <circle cx="175" cy="190" r="3.5" fill="#1A0A05"/>
+        
+      
+    </g>
+
+    <!-- Eyebrows -->
+    
+                <path d="M112,168 Q125,163 138,168" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M162,168 Q175,163 188,168" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            
+
+    <!-- Nose -->
+    <path d="M148,208 Q150,215 152,208" stroke="#D4A88A" stroke-width="1.5" fill="none"/>
+
+    <!-- Mouth -->
+    <path d="M126,230 Q150,234 174,230" stroke="#E88B8B" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Tears -->
+    
+
+    <!-- Hair front / bangs -->
+    <path d="M85,155 Q100,120 150,110 Q200,120 215,155 L210,170 Q180,140 150,135 Q120,140 90,170 Z"
+          fill="url(#hairShine)"/>
+    <!-- Side bangs -->
+    <path d="M82,155 Q78,180 75,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M218,155 Q222,180 225,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- Highlight -->
+    <path d="M120,125 Q140,115 155,120" stroke="rgba(255,255,255,0.15)" stroke-width="5" fill="none"/>
+
+    <!-- Shoulders hint -->
+    <path d="M110,295 Q150,305 190,295" stroke="#FFE4C4" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <!-- Collar -->
+    <path d="M115,290 Q150,310 185,290" stroke="#F5E6D8" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Emotion label -->
+  <text x="150" y="340" text-anchor="middle" font-size="11" fill="#888"
+        font-family="'Segoe UI',system-ui,sans-serif">calm</text>
+</svg>
+</div>
+</div>
+<div class="card">
+<div id="linxia-avatar" style="display:flex;justify-content:center;align-items:center;">
+<style>
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(5deg); }
+    50% { transform: translateY(-8px) rotate(5deg); }
+  }
+  @keyframes sway-sad {
+    0%, 100% { transform: translateY(0) rotate(5deg); }
+    50% { transform: translateY(3px) rotate(3deg); }
+  }
+  @keyframes shy-sway {
+    0%, 100% { transform: rotate(5deg); }
+    50% { transform: rotate(8deg); }
+  }
+  @keyframes sparkle-anim {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  @keyframes speaking-anim {
+    0%, 100% { ry: 3; }
+    25% { ry: 10; }
+    50% { ry: 5; }
+    75% { ry: 12; }
+  }
+  @keyframes tear-fall {
+    0% { opacity: 0.6; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  #linxia-head {
+    animation: float 4s ease-in-out infinite;
+    transform-origin: center 250px;
+  }
+  .eye-group { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+  .sparkle { animation: sparkle-anim 1.5s ease-in-out infinite; }
+  .speaking { animation: speaking-anim 0.3s ease-in-out infinite; }
+  .tear { animation: tear-fall 2s ease-in infinite; }
+  .tear-delay { animation-delay: 0.8s; }
+</style>
+<svg width="200" height="250" viewBox="0 0 300 350">
+  <defs>
+    <radialGradient id="skinGrad" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#FFF0E0"/>
+      <stop offset="100%" stop-color="#FFE4C4"/>
+    </radialGradient>
+    <radialGradient id="hairShine" cx="40%" cy="30%">
+      <stop offset="0%" stop-color="#4A3020"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </radialGradient>
+  </defs>
+
+  <g id="linxia-head">
+    <!-- Hair back -->
+    <ellipse cx="150" cy="175" rx="85" ry="100" fill="url(#hairShine)"/>
+    <!-- Hair strands back -->
+    <path d="M75,200 Q65,260 80,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+    <path d="M225,200 Q235,260 220,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+
+    <!-- Neck -->
+    <rect x="135" y="265" width="30" height="30" rx="5" fill="#FFE4C4"/>
+
+    <!-- Face -->
+    <ellipse cx="150" cy="200" rx="68" ry="78" fill="url(#skinGrad)"/>
+
+    <!-- Blush -->
+    <ellipse cx="110" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.2)" opacity="0.2"/>
+    <ellipse cx="190" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.2)" opacity="0.2"/>
+
+    <!-- Eyes -->
+    <g class="eye-group">
+      
+            <ellipse cx="125" cy="190" rx="13.200000000000001" ry="15.400000000000002" fill="white"/>
+            <circle cx="125" cy="190" r="7.700000000000001" fill="#4A2818"/>
+            <circle cx="125" cy="190" r="3.8500000000000005" fill="#1A0A05"/>
+        
+      
+            <ellipse cx="175" cy="190" rx="13.200000000000001" ry="15.400000000000002" fill="white"/>
+            <circle cx="175" cy="190" r="7.700000000000001" fill="#4A2818"/>
+            <circle cx="175" cy="190" r="3.8500000000000005" fill="#1A0A05"/>
+        
+      
+                <circle cx="122" cy="182" r="3" fill="white" opacity="0.9" class="sparkle"/>
+                <circle cx="172" cy="182" r="3" fill="white" opacity="0.9" class="sparkle"/>
+            
+    </g>
+
+    <!-- Eyebrows -->
+    
+                <path d="M112,166 Q125,161 138,166" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M162,166 Q175,161 188,166" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            
+
+    <!-- Nose -->
+    <path d="M148,208 Q150,215 152,208" stroke="#D4A88A" stroke-width="1.5" fill="none"/>
+
+    <!-- Mouth -->
+    <path d="M118,230 Q150,242 182,230" stroke="#E88B8B" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Tears -->
+    
+
+    <!-- Hair front / bangs -->
+    <path d="M85,155 Q100,120 150,110 Q200,120 215,155 L210,170 Q180,140 150,135 Q120,140 90,170 Z"
+          fill="url(#hairShine)"/>
+    <!-- Side bangs -->
+    <path d="M82,155 Q78,180 75,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M218,155 Q222,180 225,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- Highlight -->
+    <path d="M120,125 Q140,115 155,120" stroke="rgba(255,255,255,0.15)" stroke-width="5" fill="none"/>
+
+    <!-- Shoulders hint -->
+    <path d="M110,295 Q150,305 190,295" stroke="#FFE4C4" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <!-- Collar -->
+    <path d="M115,290 Q150,310 185,290" stroke="#F5E6D8" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Emotion label -->
+  <text x="150" y="340" text-anchor="middle" font-size="11" fill="#888"
+        font-family="'Segoe UI',system-ui,sans-serif">happy</text>
+</svg>
+</div>
+</div>
+<div class="card">
+<div id="linxia-avatar" style="display:flex;justify-content:center;align-items:center;">
+<style>
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-8px) rotate(-3deg); }
+  }
+  @keyframes sway-sad {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(3px) rotate(-5deg); }
+  }
+  @keyframes shy-sway {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(0deg); }
+  }
+  @keyframes sparkle-anim {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  @keyframes speaking-anim {
+    0%, 100% { ry: 3; }
+    25% { ry: 10; }
+    50% { ry: 5; }
+    75% { ry: 12; }
+  }
+  @keyframes tear-fall {
+    0% { opacity: 0.6; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  #linxia-head {
+    animation: bounce 0.6s ease-in-out infinite;
+    transform-origin: center 250px;
+  }
+  .eye-group { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+  .sparkle { animation: sparkle-anim 1.5s ease-in-out infinite; }
+  .speaking { animation: speaking-anim 0.3s ease-in-out infinite; }
+  .tear { animation: tear-fall 2s ease-in infinite; }
+  .tear-delay { animation-delay: 0.8s; }
+</style>
+<svg width="200" height="250" viewBox="0 0 300 350">
+  <defs>
+    <radialGradient id="skinGrad" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#FFF0E0"/>
+      <stop offset="100%" stop-color="#FFE4C4"/>
+    </radialGradient>
+    <radialGradient id="hairShine" cx="40%" cy="30%">
+      <stop offset="0%" stop-color="#4A3020"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </radialGradient>
+  </defs>
+
+  <g id="linxia-head">
+    <!-- Hair back -->
+    <ellipse cx="150" cy="175" rx="85" ry="100" fill="url(#hairShine)"/>
+    <!-- Hair strands back -->
+    <path d="M75,200 Q65,260 80,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+    <path d="M225,200 Q235,260 220,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+
+    <!-- Neck -->
+    <rect x="135" y="265" width="30" height="30" rx="5" fill="#FFE4C4"/>
+
+    <!-- Face -->
+    <ellipse cx="150" cy="200" rx="68" ry="78" fill="url(#skinGrad)"/>
+
+    <!-- Blush -->
+    <ellipse cx="110" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.3)" opacity="0.3"/>
+    <ellipse cx="190" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.3)" opacity="0.3"/>
+
+    <!-- Eyes -->
+    <g class="eye-group">
+      
+            <ellipse cx="125" cy="190" rx="15.600000000000001" ry="18.2" fill="white"/>
+            <circle cx="125" cy="190" r="8.4" fill="#4A2818"/>
+            <circle cx="125" cy="190" r="4.2" fill="#1A0A05"/>
+        
+      
+            <ellipse cx="175" cy="190" rx="15.600000000000001" ry="18.2" fill="white"/>
+            <circle cx="175" cy="190" r="8.4" fill="#4A2818"/>
+            <circle cx="175" cy="190" r="4.2" fill="#1A0A05"/>
+        
+      
+                <circle cx="122" cy="182" r="3" fill="white" opacity="0.9" class="sparkle"/>
+                <circle cx="172" cy="182" r="3" fill="white" opacity="0.9" class="sparkle"/>
+            
+    </g>
+
+    <!-- Eyebrows -->
+    
+                <path d="M112,163 Q125,158 138,163" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M162,163 Q175,158 188,163" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            
+
+    <!-- Nose -->
+    <path d="M148,208 Q150,215 152,208" stroke="#D4A88A" stroke-width="1.5" fill="none"/>
+
+    <!-- Mouth -->
+    <path d="M114,230 Q150,245 186,230" stroke="#E88B8B" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Tears -->
+    
+
+    <!-- Hair front / bangs -->
+    <path d="M85,155 Q100,120 150,110 Q200,120 215,155 L210,170 Q180,140 150,135 Q120,140 90,170 Z"
+          fill="url(#hairShine)"/>
+    <!-- Side bangs -->
+    <path d="M82,155 Q78,180 75,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M218,155 Q222,180 225,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- Highlight -->
+    <path d="M120,125 Q140,115 155,120" stroke="rgba(255,255,255,0.15)" stroke-width="5" fill="none"/>
+
+    <!-- Shoulders hint -->
+    <path d="M110,295 Q150,305 190,295" stroke="#FFE4C4" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <!-- Collar -->
+    <path d="M115,290 Q150,310 185,290" stroke="#F5E6D8" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Emotion label -->
+  <text x="150" y="340" text-anchor="middle" font-size="11" fill="#888"
+        font-family="'Segoe UI',system-ui,sans-serif">excited</text>
+</svg>
+</div>
+</div>
+<div class="card">
+<div id="linxia-avatar" style="display:flex;justify-content:center;align-items:center;">
+<style>
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(-8px) rotate(-8deg); }
+  }
+  @keyframes sway-sad {
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(3px) rotate(-10deg); }
+  }
+  @keyframes shy-sway {
+    0%, 100% { transform: rotate(-8deg); }
+    50% { transform: rotate(-5deg); }
+  }
+  @keyframes sparkle-anim {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  @keyframes speaking-anim {
+    0%, 100% { ry: 3; }
+    25% { ry: 10; }
+    50% { ry: 5; }
+    75% { ry: 12; }
+  }
+  @keyframes tear-fall {
+    0% { opacity: 0.6; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  #linxia-head {
+    animation: sway-sad 3s ease-in-out infinite;
+    transform-origin: center 250px;
+  }
+  .eye-group { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+  .sparkle { animation: sparkle-anim 1.5s ease-in-out infinite; }
+  .speaking { animation: speaking-anim 0.3s ease-in-out infinite; }
+  .tear { animation: tear-fall 2s ease-in infinite; }
+  .tear-delay { animation-delay: 0.8s; }
+</style>
+<svg width="200" height="250" viewBox="0 0 300 350">
+  <defs>
+    <radialGradient id="skinGrad" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#FFF0E0"/>
+      <stop offset="100%" stop-color="#FFE4C4"/>
+    </radialGradient>
+    <radialGradient id="hairShine" cx="40%" cy="30%">
+      <stop offset="0%" stop-color="#4A3020"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </radialGradient>
+  </defs>
+
+  <g id="linxia-head">
+    <!-- Hair back -->
+    <ellipse cx="150" cy="175" rx="85" ry="100" fill="url(#hairShine)"/>
+    <!-- Hair strands back -->
+    <path d="M75,200 Q65,260 80,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+    <path d="M225,200 Q235,260 220,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+
+    <!-- Neck -->
+    <rect x="135" y="265" width="30" height="30" rx="5" fill="#FFE4C4"/>
+
+    <!-- Face -->
+    <ellipse cx="150" cy="200" rx="68" ry="78" fill="url(#skinGrad)"/>
+
+    <!-- Blush -->
+    <ellipse cx="110" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.0)" opacity="0.0"/>
+    <ellipse cx="190" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.0)" opacity="0.0"/>
+
+    <!-- Eyes -->
+    <g class="eye-group">
+      
+            <ellipse cx="125" cy="190" rx="10.8" ry="12.6" fill="white"/>
+            <circle cx="125" cy="190" r="7.700000000000001" fill="#4A2818"/>
+            <circle cx="125" cy="190" r="3.8500000000000005" fill="#1A0A05"/>
+        
+      
+            <ellipse cx="175" cy="190" rx="10.8" ry="12.6" fill="white"/>
+            <circle cx="175" cy="190" r="7.700000000000001" fill="#4A2818"/>
+            <circle cx="175" cy="190" r="3.8500000000000005" fill="#1A0A05"/>
+        
+      
+    </g>
+
+    <!-- Eyebrows -->
+    
+                <line x1="110" y1="170" x2="138" y2="175" stroke="#2C1810" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="162" y1="175" x2="190" y2="170" stroke="#2C1810" stroke-width="2.5" stroke-linecap="round"/>
+            
+
+    <!-- Nose -->
+    <path d="M148,208 Q150,215 152,208" stroke="#D4A88A" stroke-width="1.5" fill="none"/>
+
+    <!-- Mouth -->
+    <path d="M134,230 Q150,226 166,230" stroke="#D4787A" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Tears -->
+    
+
+    <!-- Hair front / bangs -->
+    <path d="M85,155 Q100,120 150,110 Q200,120 215,155 L210,170 Q180,140 150,135 Q120,140 90,170 Z"
+          fill="url(#hairShine)"/>
+    <!-- Side bangs -->
+    <path d="M82,155 Q78,180 75,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M218,155 Q222,180 225,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- Highlight -->
+    <path d="M120,125 Q140,115 155,120" stroke="rgba(255,255,255,0.15)" stroke-width="5" fill="none"/>
+
+    <!-- Shoulders hint -->
+    <path d="M110,295 Q150,305 190,295" stroke="#FFE4C4" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <!-- Collar -->
+    <path d="M115,290 Q150,310 185,290" stroke="#F5E6D8" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Emotion label -->
+  <text x="150" y="340" text-anchor="middle" font-size="11" fill="#888"
+        font-family="'Segoe UI',system-ui,sans-serif">sad</text>
+</svg>
+</div>
+</div>
+<div class="card">
+<div id="linxia-avatar" style="display:flex;justify-content:center;align-items:center;">
+<style>
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(0deg); }
+  }
+  @keyframes sway-sad {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(3px) rotate(-2deg); }
+  }
+  @keyframes shy-sway {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(3deg); }
+  }
+  @keyframes sparkle-anim {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  @keyframes speaking-anim {
+    0%, 100% { ry: 3; }
+    25% { ry: 10; }
+    50% { ry: 5; }
+    75% { ry: 12; }
+  }
+  @keyframes tear-fall {
+    0% { opacity: 0.6; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  #linxia-head {
+    animation: float 4s ease-in-out infinite;
+    transform-origin: center 250px;
+  }
+  .eye-group { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+  .sparkle { animation: sparkle-anim 1.5s ease-in-out infinite; }
+  .speaking { animation: speaking-anim 0.3s ease-in-out infinite; }
+  .tear { animation: tear-fall 2s ease-in infinite; }
+  .tear-delay { animation-delay: 0.8s; }
+</style>
+<svg width="200" height="250" viewBox="0 0 300 350">
+  <defs>
+    <radialGradient id="skinGrad" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#FFF0E0"/>
+      <stop offset="100%" stop-color="#FFE4C4"/>
+    </radialGradient>
+    <radialGradient id="hairShine" cx="40%" cy="30%">
+      <stop offset="0%" stop-color="#4A3020"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </radialGradient>
+  </defs>
+
+  <g id="linxia-head">
+    <!-- Hair back -->
+    <ellipse cx="150" cy="175" rx="85" ry="100" fill="url(#hairShine)"/>
+    <!-- Hair strands back -->
+    <path d="M75,200 Q65,260 80,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+    <path d="M225,200 Q235,260 220,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+
+    <!-- Neck -->
+    <rect x="135" y="265" width="30" height="30" rx="5" fill="#FFE4C4"/>
+
+    <!-- Face -->
+    <ellipse cx="150" cy="200" rx="68" ry="78" fill="url(#skinGrad)"/>
+
+    <!-- Blush -->
+    <ellipse cx="110" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.4)" opacity="0.4"/>
+    <ellipse cx="190" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.4)" opacity="0.4"/>
+
+    <!-- Eyes -->
+    <g class="eye-group">
+      
+            <ellipse cx="125" cy="190" rx="10.2" ry="11.9" fill="white"/>
+            <circle cx="125" cy="190" r="5.6000000000000005" fill="#4A2818"/>
+            <circle cx="125" cy="190" r="2.8000000000000003" fill="#1A0A05"/>
+        
+      
+            <ellipse cx="175" cy="190" rx="10.2" ry="11.9" fill="white"/>
+            <circle cx="175" cy="190" r="5.6000000000000005" fill="#4A2818"/>
+            <circle cx="175" cy="190" r="2.8000000000000003" fill="#1A0A05"/>
+        
+      
+    </g>
+
+    <!-- Eyebrows -->
+    
+                <line x1="110" y1="176" x2="138" y2="170" stroke="#2C1810" stroke-width="3" stroke-linecap="round"/>
+                <line x1="162" y1="170" x2="190" y2="176" stroke="#2C1810" stroke-width="3" stroke-linecap="round"/>
+            
+
+    <!-- Nose -->
+    <path d="M148,208 Q150,215 152,208" stroke="#D4A88A" stroke-width="1.5" fill="none"/>
+
+    <!-- Mouth -->
+    <path d="M130,230 Q150,227 170,230" stroke="#D4787A" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Tears -->
+    
+
+    <!-- Hair front / bangs -->
+    <path d="M85,155 Q100,120 150,110 Q200,120 215,155 L210,170 Q180,140 150,135 Q120,140 90,170 Z"
+          fill="url(#hairShine)"/>
+    <!-- Side bangs -->
+    <path d="M82,155 Q78,180 75,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M218,155 Q222,180 225,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- Highlight -->
+    <path d="M120,125 Q140,115 155,120" stroke="rgba(255,255,255,0.15)" stroke-width="5" fill="none"/>
+
+    <!-- Shoulders hint -->
+    <path d="M110,295 Q150,305 190,295" stroke="#FFE4C4" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <!-- Collar -->
+    <path d="M115,290 Q150,310 185,290" stroke="#F5E6D8" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Emotion label -->
+  <text x="150" y="340" text-anchor="middle" font-size="11" fill="#888"
+        font-family="'Segoe UI',system-ui,sans-serif">angry</text>
+</svg>
+</div>
+</div>
+<div class="card">
+<div id="linxia-avatar" style="display:flex;justify-content:center;align-items:center;">
+<style>
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(10deg); }
+    50% { transform: translateY(-8px) rotate(10deg); }
+  }
+  @keyframes sway-sad {
+    0%, 100% { transform: translateY(0) rotate(10deg); }
+    50% { transform: translateY(3px) rotate(8deg); }
+  }
+  @keyframes shy-sway {
+    0%, 100% { transform: rotate(10deg); }
+    50% { transform: rotate(13deg); }
+  }
+  @keyframes sparkle-anim {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  @keyframes speaking-anim {
+    0%, 100% { ry: 3; }
+    25% { ry: 10; }
+    50% { ry: 5; }
+    75% { ry: 12; }
+  }
+  @keyframes tear-fall {
+    0% { opacity: 0.6; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  #linxia-head {
+    animation: shy-sway 2s ease-in-out infinite;
+    transform-origin: center 250px;
+  }
+  .eye-group { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+  .sparkle { animation: sparkle-anim 1.5s ease-in-out infinite; }
+  .speaking { animation: speaking-anim 0.3s ease-in-out infinite; }
+  .tear { animation: tear-fall 2s ease-in infinite; }
+  .tear-delay { animation-delay: 0.8s; }
+</style>
+<svg width="200" height="250" viewBox="0 0 300 350">
+  <defs>
+    <radialGradient id="skinGrad" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#FFF0E0"/>
+      <stop offset="100%" stop-color="#FFE4C4"/>
+    </radialGradient>
+    <radialGradient id="hairShine" cx="40%" cy="30%">
+      <stop offset="0%" stop-color="#4A3020"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </radialGradient>
+  </defs>
+
+  <g id="linxia-head">
+    <!-- Hair back -->
+    <ellipse cx="150" cy="175" rx="85" ry="100" fill="url(#hairShine)"/>
+    <!-- Hair strands back -->
+    <path d="M75,200 Q65,260 80,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+    <path d="M225,200 Q235,260 220,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+
+    <!-- Neck -->
+    <rect x="135" y="265" width="30" height="30" rx="5" fill="#FFE4C4"/>
+
+    <!-- Face -->
+    <ellipse cx="150" cy="200" rx="68" ry="78" fill="url(#skinGrad)"/>
+
+    <!-- Blush -->
+    <ellipse cx="110" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.7)" opacity="0.7"/>
+    <ellipse cx="190" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.7)" opacity="0.7"/>
+
+    <!-- Eyes -->
+    <g class="eye-group">
+      
+            <ellipse cx="125" cy="190" rx="11.399999999999999" ry="13.299999999999999" fill="white"/>
+            <circle cx="125" cy="190" r="6.3" fill="#4A2818"/>
+            <circle cx="125" cy="190" r="3.15" fill="#1A0A05"/>
+        
+      
+            <ellipse cx="175" cy="190" rx="11.399999999999999" ry="13.299999999999999" fill="white"/>
+            <circle cx="175" cy="190" r="6.3" fill="#4A2818"/>
+            <circle cx="175" cy="190" r="3.15" fill="#1A0A05"/>
+        
+      
+                <circle cx="122" cy="182" r="3" fill="white" opacity="0.9" class="sparkle"/>
+                <circle cx="172" cy="182" r="3" fill="white" opacity="0.9" class="sparkle"/>
+            
+    </g>
+
+    <!-- Eyebrows -->
+    
+                <path d="M112,167 Q125,162 138,167" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M162,167 Q175,162 188,167" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            
+
+    <!-- Nose -->
+    <path d="M148,208 Q150,215 152,208" stroke="#D4A88A" stroke-width="1.5" fill="none"/>
+
+    <!-- Mouth -->
+    <line x1="138" y1="230" x2="162" y2="230" stroke="#E88B8B" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Tears -->
+    
+
+    <!-- Hair front / bangs -->
+    <path d="M85,155 Q100,120 150,110 Q200,120 215,155 L210,170 Q180,140 150,135 Q120,140 90,170 Z"
+          fill="url(#hairShine)"/>
+    <!-- Side bangs -->
+    <path d="M82,155 Q78,180 75,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M218,155 Q222,180 225,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- Highlight -->
+    <path d="M120,125 Q140,115 155,120" stroke="rgba(255,255,255,0.15)" stroke-width="5" fill="none"/>
+
+    <!-- Shoulders hint -->
+    <path d="M110,295 Q150,305 190,295" stroke="#FFE4C4" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <!-- Collar -->
+    <path d="M115,290 Q150,310 185,290" stroke="#F5E6D8" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Emotion label -->
+  <text x="150" y="340" text-anchor="middle" font-size="11" fill="#888"
+        font-family="'Segoe UI',system-ui,sans-serif">shy</text>
+</svg>
+</div>
+</div>
+<div class="card">
+<div id="linxia-avatar" style="display:flex;justify-content:center;align-items:center;">
+<style>
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-8px) rotate(-5deg); }
+  }
+  @keyframes sway-sad {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(3px) rotate(-7deg); }
+  }
+  @keyframes shy-sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(-2deg); }
+  }
+  @keyframes sparkle-anim {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  @keyframes speaking-anim {
+    0%, 100% { ry: 3; }
+    25% { ry: 10; }
+    50% { ry: 5; }
+    75% { ry: 12; }
+  }
+  @keyframes tear-fall {
+    0% { opacity: 0.6; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  #linxia-head {
+    animation: float 4s ease-in-out infinite;
+    transform-origin: center 250px;
+  }
+  .eye-group { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+  .sparkle { animation: sparkle-anim 1.5s ease-in-out infinite; }
+  .speaking { animation: speaking-anim 0.3s ease-in-out infinite; }
+  .tear { animation: tear-fall 2s ease-in infinite; }
+  .tear-delay { animation-delay: 0.8s; }
+</style>
+<svg width="200" height="250" viewBox="0 0 300 350">
+  <defs>
+    <radialGradient id="skinGrad" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#FFF0E0"/>
+      <stop offset="100%" stop-color="#FFE4C4"/>
+    </radialGradient>
+    <radialGradient id="hairShine" cx="40%" cy="30%">
+      <stop offset="0%" stop-color="#4A3020"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </radialGradient>
+  </defs>
+
+  <g id="linxia-head">
+    <!-- Hair back -->
+    <ellipse cx="150" cy="175" rx="85" ry="100" fill="url(#hairShine)"/>
+    <!-- Hair strands back -->
+    <path d="M75,200 Q65,260 80,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+    <path d="M225,200 Q235,260 220,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+
+    <!-- Neck -->
+    <rect x="135" y="265" width="30" height="30" rx="5" fill="#FFE4C4"/>
+
+    <!-- Face -->
+    <ellipse cx="150" cy="200" rx="68" ry="78" fill="url(#skinGrad)"/>
+
+    <!-- Blush -->
+    <ellipse cx="110" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.1)" opacity="0.1"/>
+    <ellipse cx="190" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.1)" opacity="0.1"/>
+
+    <!-- Eyes -->
+    <g class="eye-group">
+      
+            <ellipse cx="125" cy="190" rx="13.200000000000001" ry="15.400000000000002" fill="white"/>
+            <circle cx="125" cy="190" r="8.049999999999999" fill="#4A2818"/>
+            <circle cx="125" cy="190" r="4.0249999999999995" fill="#1A0A05"/>
+        
+      
+            <ellipse cx="175" cy="190" rx="13.200000000000001" ry="15.400000000000002" fill="white"/>
+            <circle cx="175" cy="190" r="8.049999999999999" fill="#4A2818"/>
+            <circle cx="175" cy="190" r="4.0249999999999995" fill="#1A0A05"/>
+        
+      
+    </g>
+
+    <!-- Eyebrows -->
+    
+                <path d="M112,171 Q125,166 138,171" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M162,171 Q175,166 188,171" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            
+
+    <!-- Nose -->
+    <path d="M148,208 Q150,215 152,208" stroke="#D4A88A" stroke-width="1.5" fill="none"/>
+
+    <!-- Mouth -->
+    <path d="M136,230 Q150,225 164,230" stroke="#D4787A" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Tears -->
+    
+                <ellipse cx="135" cy="205" rx="2" ry="4" fill="rgba(100,180,255,0.6)" class="tear"/>
+                <ellipse cx="165" cy="208" rx="2" ry="3.5" fill="rgba(100,180,255,0.5)" class="tear tear-delay"/>
+            
+
+    <!-- Hair front / bangs -->
+    <path d="M85,155 Q100,120 150,110 Q200,120 215,155 L210,170 Q180,140 150,135 Q120,140 90,170 Z"
+          fill="url(#hairShine)"/>
+    <!-- Side bangs -->
+    <path d="M82,155 Q78,180 75,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M218,155 Q222,180 225,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- Highlight -->
+    <path d="M120,125 Q140,115 155,120" stroke="rgba(255,255,255,0.15)" stroke-width="5" fill="none"/>
+
+    <!-- Shoulders hint -->
+    <path d="M110,295 Q150,305 190,295" stroke="#FFE4C4" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <!-- Collar -->
+    <path d="M115,290 Q150,310 185,290" stroke="#F5E6D8" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Emotion label -->
+  <text x="150" y="340" text-anchor="middle" font-size="11" fill="#888"
+        font-family="'Segoe UI',system-ui,sans-serif">hurt</text>
+</svg>
+</div>
+</div>
+<div class="card">
+<div id="linxia-avatar" style="display:flex;justify-content:center;align-items:center;">
+<style>
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(8deg); }
+    50% { transform: translateY(-8px) rotate(8deg); }
+  }
+  @keyframes sway-sad {
+    0%, 100% { transform: translateY(0) rotate(8deg); }
+    50% { transform: translateY(3px) rotate(6deg); }
+  }
+  @keyframes shy-sway {
+    0%, 100% { transform: rotate(8deg); }
+    50% { transform: rotate(11deg); }
+  }
+  @keyframes sparkle-anim {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  @keyframes speaking-anim {
+    0%, 100% { ry: 3; }
+    25% { ry: 10; }
+    50% { ry: 5; }
+    75% { ry: 12; }
+  }
+  @keyframes tear-fall {
+    0% { opacity: 0.6; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  #linxia-head {
+    animation: bounce 0.6s ease-in-out infinite;
+    transform-origin: center 250px;
+  }
+  .eye-group { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+  .sparkle { animation: sparkle-anim 1.5s ease-in-out infinite; }
+  .speaking { animation: speaking-anim 0.3s ease-in-out infinite; }
+  .tear { animation: tear-fall 2s ease-in infinite; }
+  .tear-delay { animation-delay: 0.8s; }
+</style>
+<svg width="200" height="250" viewBox="0 0 300 350">
+  <defs>
+    <radialGradient id="skinGrad" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#FFF0E0"/>
+      <stop offset="100%" stop-color="#FFE4C4"/>
+    </radialGradient>
+    <radialGradient id="hairShine" cx="40%" cy="30%">
+      <stop offset="0%" stop-color="#4A3020"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </radialGradient>
+  </defs>
+
+  <g id="linxia-head">
+    <!-- Hair back -->
+    <ellipse cx="150" cy="175" rx="85" ry="100" fill="url(#hairShine)"/>
+    <!-- Hair strands back -->
+    <path d="M75,200 Q65,260 80,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+    <path d="M225,200 Q235,260 220,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+
+    <!-- Neck -->
+    <rect x="135" y="265" width="30" height="30" rx="5" fill="#FFE4C4"/>
+
+    <!-- Face -->
+    <ellipse cx="150" cy="200" rx="68" ry="78" fill="url(#skinGrad)"/>
+
+    <!-- Blush -->
+    <ellipse cx="110" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.15)" opacity="0.15"/>
+    <ellipse cx="190" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.15)" opacity="0.15"/>
+
+    <!-- Eyes -->
+    <g class="eye-group">
+      <path d="M113,190 Q125,183 137,190" stroke="#4A2818" stroke-width="3" fill="none" stroke-linecap="round"/>
+      
+            <ellipse cx="175" cy="190" rx="12.600000000000001" ry="14.700000000000001" fill="white"/>
+            <circle cx="175" cy="190" r="7.0" fill="#4A2818"/>
+            <circle cx="175" cy="190" r="3.5" fill="#1A0A05"/>
+        
+      
+                <circle cx="122" cy="182" r="3" fill="white" opacity="0.9" class="sparkle"/>
+                <circle cx="172" cy="182" r="3" fill="white" opacity="0.9" class="sparkle"/>
+            
+    </g>
+
+    <!-- Eyebrows -->
+    
+                <path d="M112,165 Q125,160 138,165" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M162,165 Q175,160 188,165" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            
+
+    <!-- Nose -->
+    <path d="M148,208 Q150,215 152,208" stroke="#D4A88A" stroke-width="1.5" fill="none"/>
+
+    <!-- Mouth -->
+    <path d="M122,230 Q150,240 178,230" stroke="#E88B8B" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Tears -->
+    
+
+    <!-- Hair front / bangs -->
+    <path d="M85,155 Q100,120 150,110 Q200,120 215,155 L210,170 Q180,140 150,135 Q120,140 90,170 Z"
+          fill="url(#hairShine)"/>
+    <!-- Side bangs -->
+    <path d="M82,155 Q78,180 75,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M218,155 Q222,180 225,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- Highlight -->
+    <path d="M120,125 Q140,115 155,120" stroke="rgba(255,255,255,0.15)" stroke-width="5" fill="none"/>
+
+    <!-- Shoulders hint -->
+    <path d="M110,295 Q150,305 190,295" stroke="#FFE4C4" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <!-- Collar -->
+    <path d="M115,290 Q150,310 185,290" stroke="#F5E6D8" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Emotion label -->
+  <text x="150" y="340" text-anchor="middle" font-size="11" fill="#888"
+        font-family="'Segoe UI',system-ui,sans-serif">playful</text>
+</svg>
+</div>
+</div>
+<div class="card">
+<div id="linxia-avatar" style="display:flex;justify-content:center;align-items:center;">
+<style>
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(3deg); }
+    50% { transform: translateY(-8px) rotate(3deg); }
+  }
+  @keyframes sway-sad {
+    0%, 100% { transform: translateY(0) rotate(3deg); }
+    50% { transform: translateY(3px) rotate(1deg); }
+  }
+  @keyframes shy-sway {
+    0%, 100% { transform: rotate(3deg); }
+    50% { transform: rotate(6deg); }
+  }
+  @keyframes sparkle-anim {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  @keyframes speaking-anim {
+    0%, 100% { ry: 3; }
+    25% { ry: 10; }
+    50% { ry: 5; }
+    75% { ry: 12; }
+  }
+  @keyframes tear-fall {
+    0% { opacity: 0.6; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  #linxia-head {
+    animation: float 4s ease-in-out infinite;
+    transform-origin: center 250px;
+  }
+  .eye-group { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+  .sparkle { animation: sparkle-anim 1.5s ease-in-out infinite; }
+  .speaking { animation: speaking-anim 0.3s ease-in-out infinite; }
+  .tear { animation: tear-fall 2s ease-in infinite; }
+  .tear-delay { animation-delay: 0.8s; }
+</style>
+<svg width="200" height="250" viewBox="0 0 300 350">
+  <defs>
+    <radialGradient id="skinGrad" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#FFF0E0"/>
+      <stop offset="100%" stop-color="#FFE4C4"/>
+    </radialGradient>
+    <radialGradient id="hairShine" cx="40%" cy="30%">
+      <stop offset="0%" stop-color="#4A3020"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </radialGradient>
+  </defs>
+
+  <g id="linxia-head">
+    <!-- Hair back -->
+    <ellipse cx="150" cy="175" rx="85" ry="100" fill="url(#hairShine)"/>
+    <!-- Hair strands back -->
+    <path d="M75,200 Q65,260 80,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+    <path d="M225,200 Q235,260 220,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+
+    <!-- Neck -->
+    <rect x="135" y="265" width="30" height="30" rx="5" fill="#FFE4C4"/>
+
+    <!-- Face -->
+    <ellipse cx="150" cy="200" rx="68" ry="78" fill="url(#skinGrad)"/>
+
+    <!-- Blush -->
+    <ellipse cx="110" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.1)" opacity="0.1"/>
+    <ellipse cx="190" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.1)" opacity="0.1"/>
+
+    <!-- Eyes -->
+    <g class="eye-group">
+      
+            <ellipse cx="125" cy="190" rx="12.0" ry="14.0" fill="white"/>
+            <circle cx="125" cy="190" r="7.0" fill="#4A2818"/>
+            <circle cx="125" cy="190" r="3.5" fill="#1A0A05"/>
+        
+      
+            <ellipse cx="175" cy="190" rx="12.0" ry="14.0" fill="white"/>
+            <circle cx="175" cy="190" r="7.0" fill="#4A2818"/>
+            <circle cx="175" cy="190" r="3.5" fill="#1A0A05"/>
+        
+      
+                <circle cx="122" cy="182" r="3" fill="white" opacity="0.9" class="sparkle"/>
+                <circle cx="172" cy="182" r="3" fill="white" opacity="0.9" class="sparkle"/>
+            
+    </g>
+
+    <!-- Eyebrows -->
+    
+                <path d="M112,167 Q125,162 138,167" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M162,167 Q175,162 188,167" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            
+
+    <!-- Nose -->
+    <path d="M148,208 Q150,215 152,208" stroke="#D4A88A" stroke-width="1.5" fill="none"/>
+
+    <!-- Mouth -->
+    <path d="M130,230 Q150,236 170,230" stroke="#E88B8B" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Tears -->
+    
+
+    <!-- Hair front / bangs -->
+    <path d="M85,155 Q100,120 150,110 Q200,120 215,155 L210,170 Q180,140 150,135 Q120,140 90,170 Z"
+          fill="url(#hairShine)"/>
+    <!-- Side bangs -->
+    <path d="M82,155 Q78,180 75,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M218,155 Q222,180 225,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- Highlight -->
+    <path d="M120,125 Q140,115 155,120" stroke="rgba(255,255,255,0.15)" stroke-width="5" fill="none"/>
+
+    <!-- Shoulders hint -->
+    <path d="M110,295 Q150,305 190,295" stroke="#FFE4C4" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <!-- Collar -->
+    <path d="M115,290 Q150,310 185,290" stroke="#F5E6D8" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Emotion label -->
+  <text x="150" y="340" text-anchor="middle" font-size="11" fill="#888"
+        font-family="'Segoe UI',system-ui,sans-serif">gentle</text>
+</svg>
+</div>
+</div>
+<div class="card">
+<div id="linxia-avatar" style="display:flex;justify-content:center;align-items:center;">
+<style>
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(0deg); }
+  }
+  @keyframes sway-sad {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(3px) rotate(-2deg); }
+  }
+  @keyframes shy-sway {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(3deg); }
+  }
+  @keyframes sparkle-anim {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.6); }
+  }
+  @keyframes speaking-anim {
+    0%, 100% { ry: 3; }
+    25% { ry: 10; }
+    50% { ry: 5; }
+    75% { ry: 12; }
+  }
+  @keyframes tear-fall {
+    0% { opacity: 0.6; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  #linxia-head {
+    animation: float 4s ease-in-out infinite;
+    transform-origin: center 250px;
+  }
+  .eye-group { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+  .sparkle { animation: sparkle-anim 1.5s ease-in-out infinite; }
+  .speaking { animation: speaking-anim 0.3s ease-in-out infinite; }
+  .tear { animation: tear-fall 2s ease-in infinite; }
+  .tear-delay { animation-delay: 0.8s; }
+</style>
+<svg width="200" height="250" viewBox="0 0 300 350">
+  <defs>
+    <radialGradient id="skinGrad" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#FFF0E0"/>
+      <stop offset="100%" stop-color="#FFE4C4"/>
+    </radialGradient>
+    <radialGradient id="hairShine" cx="40%" cy="30%">
+      <stop offset="0%" stop-color="#4A3020"/>
+      <stop offset="100%" stop-color="#2C1810"/>
+    </radialGradient>
+  </defs>
+
+  <g id="linxia-head">
+    <!-- Hair back -->
+    <ellipse cx="150" cy="175" rx="85" ry="100" fill="url(#hairShine)"/>
+    <!-- Hair strands back -->
+    <path d="M75,200 Q65,260 80,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+    <path d="M225,200 Q235,260 220,320" stroke="#2C1810" stroke-width="12" fill="none" opacity="0.7"/>
+
+    <!-- Neck -->
+    <rect x="135" y="265" width="30" height="30" rx="5" fill="#FFE4C4"/>
+
+    <!-- Face -->
+    <ellipse cx="150" cy="200" rx="68" ry="78" fill="url(#skinGrad)"/>
+
+    <!-- Blush -->
+    <ellipse cx="110" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.0)" opacity="0.0"/>
+    <ellipse cx="190" cy="210" rx="18" ry="10" fill="rgba(255, 130, 130, 0.0)" opacity="0.0"/>
+
+    <!-- Eyes -->
+    <g class="eye-group">
+      
+            <ellipse cx="125" cy="190" rx="9.600000000000001" ry="11.200000000000001" fill="white"/>
+            <circle cx="125" cy="190" r="4.8999999999999995" fill="#4A2818"/>
+            <circle cx="125" cy="190" r="2.4499999999999997" fill="#1A0A05"/>
+        
+      
+            <ellipse cx="175" cy="190" rx="9.600000000000001" ry="11.200000000000001" fill="white"/>
+            <circle cx="175" cy="190" r="4.8999999999999995" fill="#4A2818"/>
+            <circle cx="175" cy="190" r="2.4499999999999997" fill="#1A0A05"/>
+        
+      
+    </g>
+
+    <!-- Eyebrows -->
+    
+                <path d="M112,170 Q125,165 138,170" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M162,170 Q175,165 188,170" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            
+
+    <!-- Nose -->
+    <path d="M148,208 Q150,215 152,208" stroke="#D4A88A" stroke-width="1.5" fill="none"/>
+
+    <!-- Mouth -->
+    <line x1="138" y1="230" x2="162" y2="230" stroke="#E88B8B" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Tears -->
+    
+
+    <!-- Hair front / bangs -->
+    <path d="M85,155 Q100,120 150,110 Q200,120 215,155 L210,170 Q180,140 150,135 Q120,140 90,170 Z"
+          fill="url(#hairShine)"/>
+    <!-- Side bangs -->
+    <path d="M82,155 Q78,180 75,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M218,155 Q222,180 225,210" stroke="#2C1810" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- Highlight -->
+    <path d="M120,125 Q140,115 155,120" stroke="rgba(255,255,255,0.15)" stroke-width="5" fill="none"/>
+
+    <!-- Shoulders hint -->
+    <path d="M110,295 Q150,305 190,295" stroke="#FFE4C4" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <!-- Collar -->
+    <path d="M115,290 Q150,310 185,290" stroke="#F5E6D8" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Emotion label -->
+  <text x="150" y="340" text-anchor="middle" font-size="11" fill="#888"
+        font-family="'Segoe UI',system-ui,sans-serif">cold</text>
+</svg>
+</div>
+</div>
+</body></html>
