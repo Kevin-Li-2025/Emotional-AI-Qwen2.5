@@ -1,25 +1,29 @@
-# Core ML Stack
-torch>=2.1.0
-transformers>=4.36.0
-trl>=0.12.0
-peft>=0.7.0
-accelerate>=0.25.0
-datasets>=2.15.0
+# Core AI
+torch
+transformers
+peft
+trl
+accelerate
+datasets
 
 # Inference
-llama-cpp-python>=0.2.0
+llama-cpp-python
 
-# Memory (RAG)
-chromadb>=0.4.0
-sentence-transformers>=2.2.0
+# Memory
+chromadb
+sentence-transformers
+networkx
 
-# Data Pipeline
-requests>=2.31.0
-numpy>=1.24.0
-pandas>=2.0.0
+# Voice
+edge-tts
 
-# Visualization & UI
-gradio>=4.0.0
+# Vision
+Pillow
 
-# Utilities
-tqdm>=4.66.0
+# UI
+gradio
+
+# Data
+requests
+numpy
+pandas
