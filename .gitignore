@@ -1,0 +1,19 @@
+# Secrets and sensitive info
+config.py
+*.sh
+*.expect
+
+# Large model files and data
+emotional-model-output/
+emotional_training_data.json
+*.gguf
+*.safetensors
+
+# Python artifacts
+__pycache__/
+*.pyc
+venv/
+.env
+
+# MacOS files
+.DS_Store
