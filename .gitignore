@@ -1,13 +1,25 @@
-# Secrets and sensitive info
+# Secrets and credentials
 config.py
-*.sh
-*.expect
 
-# Large model files and data
+# Local-only deployment scripts
+scripts/
+
+# Large model files and training data
 emotional-model-output/
-emotional_training_data.json
+emotional_training_data*.json
+dpo_preference_data.json
 *.gguf
 *.safetensors
+
+# Generated reports (can be re-generated)
+data_analysis_report.html
+benchmarks/*.json
+
+# Memory database (user-specific)
+memory_db/
+
+# TTS output
+voice_output/
 
 # Python artifacts
 __pycache__/
@@ -15,5 +27,9 @@ __pycache__/
 venv/
 .env
 
-# MacOS files
+# MacOS
 .DS_Store
+
+# IDE
+.vscode/
+.idea/

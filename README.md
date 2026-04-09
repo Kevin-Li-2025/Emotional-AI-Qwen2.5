@@ -1,64 +1,147 @@
-# Project: Emotional AI "Lin Xia" (林夏)
+# Emotional AI — Lin Xia (林夏) v2.0
 
-This project focuses on fine-tuning a Large Language Model (**Qwen2.5-1.5B-Instruct**) to exhibit human-like emotional behavior. The goal is to create a character named **Lin Xia (林夏)**—a realistic, emotional girl who responds naturally to various social interactions (warmth, neglect, offense, and reconciliation).
+A full-stack emotional AI system built on **Qwen2.5-1.5B-Instruct**, fine-tuned to exhibit human-like emotional behavior. Lin Xia is a realistic, emotionally intelligent companion with persistent memory, context compression, and multi-modal output capabilities.
 
-## 🚀 Project Status
-- **Training**: Successfully completed 4 epochs of PEFT/LoRA training on a remote L20 GPU.
-- **Quantization**: Converted to **GGUF (Q8_0)** for high-performance local inference on macOS (Metal accelerated).
-- **Personality**: Verified to show consistent emotional state memory and boundaries.
+## ✨ Features
 
----
+| Feature | Description | Status |
+|:--------|:------------|:-------|
+| **SFT Fine-tuning** | LoRA-based personality training on 1000+ emotional conversations | ✅ Complete |
+| **DPO Alignment** | Direct Preference Optimization for sharper emotional responses | ✅ Built |
+| **Quantization Study** | FP16 → Q2_K emotional fidelity benchmark with latency analysis | ✅ Built |
+| **KV Cache Optimization** | Multi-turn throughput analysis with cache quantization | ✅ Built |
+| **Context Compression** | Sliding window + emotional state summary for infinite conversation | ✅ Built |
+| **Persistent Memory** | ChromaDB RAG — she remembers you across sessions | ✅ Built |
+| **Data Pipeline** | 15+ scenario generator, AI judge scoring, distribution visualization | ✅ Built |
+| **TTS Integration** | Emotion-tagged speech synthesis (CosyVoice / GPT-SoVITS) | ✅ Built |
+| **Unified App** | CLI + Gradio web interface with real-time status display | ✅ Built |
 
-## 🛠️ Technical Architecture
+## 🏗️ Architecture
 
-### Core Stack
-- **Model**: Qwen2.5-1.5B-Instruct
-- **Framework**: HuggingFace Transformers + PEFT (LoRA)
-- **Precision**: bf16 (Training) / Q8_0 (Local Inference)
-- **Engine**: llama-cpp-python (Local Mac)
-
-### Key Files
-- `config.py`: Central configuration for personality (System Prompt), training hyperparameters, and server credentials.
-- `train.py`: The core training pipeline used on the remote GPU server. Handles model loading, LoRA adaptation, and weight merging.
-- `test_local_gguf.py`: A local script to carry out inference with the GGUF model on your Mac. Includes proper System Prompt injection and repetition control.
-- `test_model.py`: A remote validation script used to verify model behavior during the training phase.
-
----
-
-## 👩‍💼 Character Profile: Lin Xia (林夏)
-Lin Xia is designed to be a realistic partner with distinct emotional rules:
-- **Emotional Memory**: She remembers how you treat her. Hurt doesn't disappear instantly.
-- **Boundaries**: She is not unconditionally submissive. She gets angry if insulted and requires a genuine apology.
-- **Natural Transitions**: Her mood shifts gradually based on conversation flow.
-- **Human-like**: She avoids "As an AI..." language and excessive emoji use.
-
----
-
-## 📖 Usage Guide
-
-### 1. Local Chat (macOS)
-The model is already downloaded to `emotional-model-output/linxia-emotional-q8_0.gguf`. To start a test chat:
-```bash
-python3 test_local_gguf.py
+```
+┌──────────────────────────────────────────────────┐
+│                   User Input                      │
+├──────────────┬───────────────────────────────────┤
+│ Memory       │ Context Engine                     │
+│ Retriever    │ ┌─────────────┐ ┌───────────────┐ │
+│ (ChromaDB)   │ │ Sliding     │ │ Emotional     │ │
+│     ↓        │ │ Summary     │ │ State Tracker │ │
+│ Relevant     │ └─────────────┘ └───────────────┘ │
+│ Memories     │           ↓                        │
+├──────────────┴───────────────────────────────────┤
+│              Optimized Prompt Builder              │
+│  [System + Emotion State + Memories + Recent Turns]│
+├──────────────────────────────────────────────────┤
+│          Qwen2.5-1.5B (GGUF / Q8_0)              │
+├──────────────────────────────────────────────────┤
+│              Response + Emotion Tag               │
+├──────────┬────────────────────┬──────────────────┤
+│ Memory   │ Context            │ TTS Engine       │
+│ Extractor│ Update             │ (CosyVoice)      │
+│ → Store  │ → Sliding Summary  │ → Voice Output   │
+└──────────┴────────────────────┴──────────────────┘
 ```
 
-### 2. Manual Inference
-You can load the `.gguf` file into any compatible tool (LM Studio, Ollama, etc.). Use the following recommended parameters:
-- **System Prompt**: Found in `config.py` under `CHARACTER_DESCRIPTION`.
-- **Temperature**: 0.7 - 0.9
-- **Repeat Penalty**: 1.1 - 1.2
-- **Stop Tokens**: `<|im_end|>`, `<|im_start|>`
+## 📁 Project Structure
 
-### 3. Remote Training
-If you wish to retrain or update the model, use the `train.py` script on a GPU-enabled server:
-```bash
-python3 train.py
+```
+├── app.py                       # Unified chat app (CLI + Gradio)
+├── train.py                     # SFT training pipeline
+├── train_dpo.py                 # DPO alignment training
+├── requirements.txt             # Dependencies
+├── README.md                    # This file
+│
+├── data_pipeline/               # Data engineering
+│   ├── generate_diverse.py      # 15+ scenario data generation
+│   ├── generate_dpo_pairs.py    # DPO preference pair creation
+│   ├── ai_judge.py              # Automated quality scoring (5 dimensions)
+│   └── visualize_data.py        # Interactive HTML distribution report
+│
+├── benchmarks/                  # Performance research
+│   ├── quantization_benchmark.py # Multi-level quant comparison
+│   └── kv_cache_benchmark.py    # KV cache strategy analysis
+│
+├── context_engine/              # Context compression
+│   ├── context_manager.py       # Budget-based context allocation
+│   └── sliding_summary.py       # Sliding window + emotional summary
+│
+├── memory/                      # Long-term persistent memory
+│   ├── memory_store.py          # ChromaDB vector store
+│   ├── memory_extractor.py      # LLM-based fact extraction
+│   └── memory_retriever.py      # Recency-biased semantic retrieval
+│
+└── voice/                       # Text-to-speech
+    └── tts_engine.py            # Emotion-aware TTS (CosyVoice/GPT-SoVITS)
 ```
 
----
+## 🚀 Quick Start
 
-## 📝 Training History & Fixes
-- **Driver Compatibility**: Transitioned from Unsloth/BitsAndBytes to a standard **bf16 PEFT** pipeline to resolve remote driver conflicts.
-- **Weight Integrity**: Fixed "incomplete metadata" errors by ensuring full `model.safetensors` synchronization.
-- **Precision**: Standardized on **bf16** for training to preserve the delicate emotional nuances of the 1.5B model.
-- **English Documentation**: All code comments and project documentation have been translated to English for international standards.
+### Chat (CLI)
+```bash
+python3 app.py
+```
+
+### Chat (Web UI)
+```bash
+python3 app.py --ui
+```
+
+### Chat with TTS
+```bash
+python3 app.py --tts --tts-backend cosyvoice
+```
+
+### Run Quantization Benchmark
+```bash
+python3 -m benchmarks.quantization_benchmark
+```
+
+### Run KV Cache Benchmark
+```bash
+python3 -m benchmarks.kv_cache_benchmark
+```
+
+### Generate Training Data (v2)
+```bash
+python3 -m data_pipeline.generate_diverse
+```
+
+### Train with DPO
+```bash
+python3 train_dpo.py
+```
+
+## 🧠 Technical Highlights
+
+### Context Compression
+The `ContextManager` allocates the context window budget across 4 layers:
+- **15%** — System prompt (character definition)
+- **5%** — Emotional state vector (compressed mood/trust/affection)
+- **20%** — Retrieved memories from ChromaDB
+- **60%** — Recent conversation turns (sliding window)
+
+When older turns overflow, they are summarized by the LLM into compact emotional state blocks, creating the illusion of **infinite context** while staying within the model's actual window.
+
+### Memory Architecture
+Memories are stored in three types:
+- **Facts**: "User works in tech", "User's birthday is March 15"
+- **Emotional Events**: "User insulted Lin Xia, she was hurt (severity: 8/10)"
+- **Preferences**: "User prefers playful responses over formal ones"
+
+Retrieval uses a **combined scoring** function: `(1-w) × relevance × importance + w × recency`, with a 7-day half-life decay for recency.
+
+### Quantization Study
+Benchmarks across 5 quantization levels (FP16 → Q2_K) measure:
+- Tokens per second (throughput)
+- File size (deployment cost)
+- Emotional fidelity (scored by AI judge on 15 standardized prompts)
+
+## 📊 Training Results (v1.0)
+- **Base Model**: Qwen2.5-1.5B-Instruct
+- **Method**: PEFT LoRA (r=32, α=64) on L20 GPU
+- **Epochs**: 4 | **Final Loss**: 0.179
+- **Dataset**: 1,000 conversations across 6 emotional scenarios
+- **Quantized**: GGUF Q8_0 (1.6GB) for local Mac inference (Metal accelerated)
+
+## 📄 License
+MIT
